@@ -1,13 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { authAxios } from "../utils/authAxios";
+import "./css/FriendDetail.css";
 
 const FriendDetail = props => {
 
-	const { id } = useParams();
+	const [member, setMember] = useState({})
+
+	useEffect(() => {
+		getFriend()
+	}, [member, getFriend])
+
+	function getFriend() {
+		authAxios().get(`/friends/${props.match.params.id}`)
+				 .then(res => {
+				 	console.log(res)
+				 	setMember(res.data)
+				 })
+				 .catch(err => {
+				 	console.log(err)
+				 })
+	}
 
 	return (
-		<h1>Now showing friend {id}</h1>
+		<div>
+		<h1 className="detail-title">{member.name}</h1>
+		<h1 className="detail-title">{member.email}</h1>
+		</div>
 	);
 };
 

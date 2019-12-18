@@ -7,7 +7,7 @@ const AddFriendFooter = props => {
 
 	const a = [];
 	const [ages, setAges] = useState(a);
-	const [friend, setFriend] = useState({ id: null, name: "", age: 19, email: "" });
+	const [friend, setFriend] = useState({ id: Date.now(), name: "", age: 19, email: "" });
 
 	useEffect(() => {
 		ageGenerator();
@@ -16,16 +16,13 @@ const AddFriendFooter = props => {
 	const postData = event => {
 		event.preventDefault();
 		setFriend({...friend, id: Date.now() })
+		console.log(friend)
 		authAxios().post("/friends", friend)
 				   .then(res => console.log(res))
 				   .catch(err => console.log(err))
 	}
 
 	const handleChanges = event => {
-		if (event.target.name == "age") {
-			console.log(event.target.value, typeof event.target.value);
-			setFriend({...friend, [event.target.name]: event.target.value })
-		}
 		setFriend({...friend, [event.target.name]: event.target.value });
 	}
 
@@ -52,7 +49,7 @@ const AddFriendFooter = props => {
 					className="footer-input"
 				>
 					{ages.map(age => (
-						<option value={age}>{age}</option>
+						<option value={Number(age)}>{age}</option>
 					))
 					}
 				</select>

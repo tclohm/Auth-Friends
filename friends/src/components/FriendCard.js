@@ -1,15 +1,17 @@
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./css/Friends.css";
 
 
 const FriendCard = props => {
+
 	const { friend } = props;
-	const { url } = useRouteMatch();
+	//const friendID = friends.find(person => `${person.id}` === props.match.parms.id)
+	
 	return (
 		<div>
-			<Link to={`${url}/:id`} className="card">
+			<Link to={`/friends/${friend.id}`} className="card">
 				<div className="left">
 				<h4>{friend.name}</h4>
 				<h6>{friend.email}</h6>
