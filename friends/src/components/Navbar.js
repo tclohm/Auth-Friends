@@ -4,6 +4,7 @@ import { Route, Link, Switch } from "react-router-dom";
 
 import Login from "./Login";
 import Friends from "./Friends";
+import FriendDetail from "./FriendDetail";
 import PrivateRoute from "./PrivateRoute";
 
 const Navbar = props => {
@@ -22,6 +23,7 @@ const Navbar = props => {
 			</nav>
 			<Switch>
 				<PrivateRoute exact path="/friends" component={Friends} />
+				<PrivateRoute exact path="/friends/:id" component={FriendDetail} />
 				<Route path="/login" component={Login} />
 				<Route component={Login} />
 			</Switch>
